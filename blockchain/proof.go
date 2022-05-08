@@ -10,17 +10,6 @@ import (
 	"math/big"
 )
 
-// Take data from a block
-
-// Create a counter (nonce) which starts at 0
-
-// Create a hash of data + counter
-
-// Check hash to see if it matches requirements
-
-// Requirements -
-// 1) The first few bytes must contain 0
-
 const Difficulty = 18
 
 type ProofOfWork struct {
@@ -40,7 +29,7 @@ func (pow *ProofOfWork) InitData(nonce int) []byte {
 	data := bytes.Join(
 		[][]byte{
 			pow.Block.PrevHash,
-			pow.Block.Data,
+			pow.Block.HashTransactions(),
 			ToHex(int64(nonce)),
 			ToHex(int64(Difficulty)),
 		},
